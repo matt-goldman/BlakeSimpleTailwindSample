@@ -1,0 +1,49 @@
+﻿<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    @if (!string.IsNullOrEmpty(Page.Image))
+    {
+        <img src="@Page.Image" alt="Post image" class="w-full h-48 object-cover">
+    }
+    else
+    {
+        <img src="/placeholder.svg?height=192&width=300" alt="Placeholder image" class="w-full h-48 object-cover">
+    }
+    <div class="p-6">
+        <div class="flex items-center mb-2">
+            <span class="@_chipBgColor @_chipTextColor text-xs font-medium px-2.5 py-0.5 rounded">@_keyTag</span>
+            <span class="text-gray-500 text-sm ml-3">@($"{Page.Date:'MMM dd, yyyy'}")</span>
+        </div>
+        <h4 class="text-xl font-bold text-gray-900 mb-3">
+            <a href="@Page.Slug" class="hover:text-blue-600 transition-colors">@Page.Title</a>
+        </h4>
+        <p class="text-gray-600 mb-4">@Page.Description</p>
+        <Author Page="@Page" ShowTitle="false" ShowAvatar="true" />
+    </div>
+</article>
+
+@code {
+    [Parameter]
+    public PageModel Page { get; set; } = new PageModel();
+
+    private string _keyTag = "General";
+
+    private string _chipBgColor = "bg-gray-100";
+    private string _chipTextColor = "text-gray-800";
+
+    protected override void OnParametersSet()
+    {
+        if (Page is not null)
+        {
+            var firstTag = Page.Tags.FirstOrDefault();
+
+            if (firstTag is not null)
+            {
+                _keyTag = firstTag;
+                _chipBgColor = $"bg-{firstTag.GetChipColor()}-100";
+                _chipTextColor = $"text-{firstTag.GetChipColor()}-800";
+            }
+        }
+
+        base.OnParametersSet();
+    }
+
+}

@@ -1,0 +1,52 @@
+﻿<div class="flex items-center">
+    @if (!string.IsNullOrEmpty(_authorAvatar) && ShowAvatar)
+    {
+        <img src="@_authorAvatar" alt="Author avatar" class="w-10 h-10 rounded-full mr-3">
+    }
+    else if (!string.IsNullOrEmpty(_authorInitials))
+    {
+        <div class="w-10 h-10 bg-gray-200 text-gray-700 rounded-full flex items-center justify-center mr-3">
+            <span class="text-sm font-medium">@_authorInitials</span>
+        </div>
+    }
+    else
+    {
+        <img src="/placeholder.svg?height=40&width=40" alt="Author avatar" class="w-10 h-10 rounded-full mr-3">
+    }
+    <div>
+        <p class="text-sm font-medium text-gray-900">@_authorName</p>
+        @if (ShowTitle)
+        {
+            <p class="text-sm text-gray-600">@_authorTitle</p>
+        }
+    </div>
+</div>
+
+@code {
+    private string _authorName = string.Empty;
+    private string _authorTitle = string.Empty;
+    private string? _authorAvatar;
+    private string _authorInitials = string.Empty;
+
+    [Parameter]
+    public PageModel? Page { get; set; }
+
+    [Parameter]
+    public bool ShowTitle { get; set; } = true;
+
+    [Parameter]
+    public bool ShowAvatar { get; set; } = true;
+
+    protected override void OnParametersSet()
+    {
+        if (Page is not null)
+        {
+            _authorName = Page?.Metadata["Author"] ?? "Unknown Author";
+            _authorTitle = Page?.Metadata["Title"] ?? "Contributor";
+            _authorAvatar = Page?.Metadata["Avatar"] ?? null;
+            _authorInitials = string.IsNullOrEmpty(_authorName) ? string.Empty : string.Join("", _authorName.Split(' ').Select(s => s[0].ToString().ToUpperInvariant()).Take(2));
+        }
+
+        base.OnParametersSet();
+    }
+}
