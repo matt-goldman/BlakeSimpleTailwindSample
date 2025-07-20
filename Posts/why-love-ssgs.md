@@ -5,7 +5,7 @@ description: "A personal take on the benefits of using SSGs for content-driven s
 tags: [ssg, webdev, jamstack]
 author: Jane Dev
 authorTitle: Developer Advocate
-avatar: "/images/authors/jane.png"
+avatar: "/images/authors/jane.jpg"
 image: "/images/posts/ssg-love.png"
 ---
 

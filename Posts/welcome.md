@@ -5,7 +5,7 @@ description: "A quick intro to this developer blog and what to expect."
 tags: [intro, personal]
 author: Jane Dev
 authorTitle: Developer Advocate
-avatar: "/images/authors/jane.png"
+avatar: "/images/authors/jane.jpg"
 image: "/images/posts/welcome.jpg"
 ---
 
