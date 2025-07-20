@@ -32,7 +32,7 @@
                         <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
                     </NavLink>
                     
-                    @foreach(var contentPage in GeneratedContentIndex.GetPages().Where(p => p.Slug.ToLower().Contains("/pages/")))
+                    @foreach(var contentPage in GeneratedContentIndex.GetPages().Where(p => p.Slug.Contains("/pages/", StringComparison.InvariantCultureIgnoreCase)))
                     {
                         <NavLink class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" href="@contentPage.Slug">
                             <span class="@contentPage.IconIdentifier" aria-hidden="true"></span> @contentPage.Title

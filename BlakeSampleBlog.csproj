@@ -27,4 +27,8 @@
     <Compile Remove="**/template.razor" />
     <None Include="**/template.razor" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\template.razor" />
+  </ItemGroup>
 </Project>

@@ -1,0 +1,45 @@
+﻿<PageTitle>@Title</PageTitle>
+
+<main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+   
+    <!-- Page Header -->
+    <header class="mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">@Title</h1>
+        <p class="text-xl text-gray-600 mb-6">@Description</p>
+    </header>
+
+    <!-- Featured Image -->
+    <div class="mb-8">
+        <img src="@_imageUrl" alt="Modern web development workspace" class="w-full h-64 md:h-96 object-cover rounded-lg shadow-md">
+    </div>
+
+    <!-- Article Content -->
+    <article class="prose prose-lg max-w-none">
+        <div class="bg-white rounded-lg shadow-sm p-8">
+            @Body
+        </div>
+    </article>
+
+</main>
+
+<Footer />
+
+@code {
+    private string id = "@Id";
+
+    string _imageUrl = "https://placeholder.pics/svg/800x400/DFEEF6-B6BEC3/000000";
+
+    protected override void OnInitialized()
+    {
+        var _page = GeneratedContentIndex.GetPages().FirstOrDefault(p => p.Id == id);
+
+        if (_page == null) return;
+
+        if (!string.IsNullOrEmpty(_page.Image))
+        {
+            _imageUrl = _page.Image;
+        }
+
+        base.OnInitialized();
+    }
+}

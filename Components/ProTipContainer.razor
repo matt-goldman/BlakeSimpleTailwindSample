@@ -1,0 +1,10 @@
+﻿<div class="bg-gray-50 border-l-4 border-blue-500 p-4 mb-6">
+    <p class="text-gray-700"><strong>Pro Tip:</strong> @ChildContent</p>
+</div>
+
+@code {
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    
+}

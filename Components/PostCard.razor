@@ -1,12 +1,5 @@
 ﻿<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-    @if (!string.IsNullOrEmpty(Page.Image))
-    {
-        <img src="@Page.Image" alt="Post image" class="w-full h-48 object-cover">
-    }
-    else
-    {
-        <img src="/placeholder.svg?height=192&width=300" alt="Placeholder image" class="w-full h-48 object-cover">
-    }
+    <img src="@(Page.Image ?? "https://placeholder.pics/svg/300x192/DFEEF6-B6BEC3/000000")" alt="Post image" class="w-full h-48 object-cover">
     <div class="p-6">
         <div class="flex items-center mb-2">
             <span class="@_chipBgColor @_chipTextColor text-xs font-medium px-2.5 py-0.5 rounded">@_keyTag</span>
