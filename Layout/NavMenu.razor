@@ -35,7 +35,7 @@
                     @foreach(var contentPage in GeneratedContentIndex.GetPages().Where(p => p.Slug.Contains("/pages/", StringComparison.InvariantCultureIgnoreCase)))
                     {
                         <NavLink class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" href="@contentPage.Slug">
-                            <span class="@contentPage.IconIdentifier" aria-hidden="true"></span> @contentPage.Title
+                            <span class="bi @contentPage.IconIdentifier-nav-menu" aria-hidden="true"></span> @contentPage.Title
                         </NavLink>
                     }
                 </div>

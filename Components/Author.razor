@@ -42,7 +42,7 @@
         if (Page is not null)
         {
             _authorName = Page?.Metadata["Author"] ?? "Unknown Author";
-            _authorTitle = Page?.Metadata["Title"] ?? "Contributor";
+            _authorTitle = Page?.Metadata["AuthorTitle"] ?? "Contributor";
             _authorAvatar = Page?.Metadata["Avatar"] ?? null;
             _authorInitials = string.IsNullOrEmpty(_authorName) ? string.Empty : string.Join("", _authorName.Split(' ').Select(s => s[0].ToString().ToUpperInvariant()).Take(2));
         }
