@@ -4,7 +4,20 @@
     <!-- Breadcrumb -->
     <nav class="mb-8">
         <ol class="flex items-center space-x-2 text-sm text-gray-500">
-            @_breadcrumbs
+            @foreach(var part in _breadcrumbs)
+            {
+                if (part == _breadcrumbs.Last())
+                {
+                    <li class="text-gray-900">@part</li>;
+                }
+                else
+                {
+                    <li>
+                        <a href="/@string.Join("/", _breadcrumbs.TakeWhile(p => p != part))" class="hover:text-gray-700">@part</a>
+                    </li>
+                    <li><span>/</span></li>
+                }
+            }
         </ol>
     </nav>
 
@@ -90,7 +103,7 @@
 
     private List<PageModel> _relatedPosts = [];
 
-    private string? _breadcrumbs;
+    private List<string> _breadcrumbs = [];
 
     private string _primaryTag = "General";
 
@@ -111,16 +124,9 @@
             throw new InvalidOperationException($"Page with ID '{id}' not found.");
         }
 
-        var breadcrumbParts = _page.Slug.Split('/').Where(part => !string.IsNullOrEmpty(part)).ToList();
-
-        // re-create breadcrumbs, with links to each segment
-        // Use the class hover:text-gray-700 for all but the last segment
-        // Use the class text-gray-900 for the last segment
-        // Don't make the last segment a link
-        _breadcrumbs = string.Join("<li><span>/</span></li>", breadcrumbParts.Select((part, index) => 
-            index < breadcrumbParts.Count - 1 
-                ? $"<li><a href=\"/{string.Join("/", breadcrumbParts.Take(index + 1))}\" class=\"hover:text-gray-700\">{part}</a></li>" 
-                : $"<li><span class=\"text-gray-900\">{part}</span></li>"));
+        _breadcrumbs = _page.Slug.Split('/').Where(part => !string.IsNullOrEmpty(part)).ToList();
+        _breadcrumbs.Insert(0, "Home");
+        _breadcrumbs[_breadcrumbs.Count - 1] = _page.Title;
 
         if (_page.Tags.Count > 0)
         {

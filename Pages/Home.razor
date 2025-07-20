@@ -21,12 +21,12 @@
             <article class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="md:flex">
                     <div class="md:w-1/3">
-                        <img src="@_featuredPost.Image" alt="Featured post image" class="w-full h-48 md:h-full object-cover">
+                        <img src="@(_featuredPost.Image ?? "https://placeholder.pics/svg/400x300/DFEEF6-B6BEC3/000000")" alt="Featured post image" class="w-full h-48 md:h-full object-cover">
                     </div>
                     <div class="md:w-2/3 p-6">
                         <div class="flex items-center mb-2">
                             <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">@(_featuredPost.Tags.FirstOrDefault() ?? string.Empty)</span>
-                            <span class="text-gray-500 text-sm ml-3">@($"{_featuredPost.Date:'MMM dd, yyyy'}")</span>
+                            <span class="text-gray-500 text-sm ml-3">@($"{_featuredPost.Date:MMM dd, yyyy}")</span>
                         </div>
                         <h4 class="text-2xl font-bold text-gray-900 mb-3">
                             <a href="@_featuredPost.Slug" class="hover:text-blue-600 transition-colors">@_featuredPost.Title</a>
@@ -55,13 +55,13 @@
     {
         <div class="flex justify-center mt-12">
             <div class="flex space-x-1">
-                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">Previous</a>
+                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50" @onclick=PreviousPage>Previous</a>
                 @foreach (var item in _pages)
                 {
                     <a href="#" class="px-3 py-2 text-sm font-medium @(item == _currentPage ? "text-white bg-blue-600 border-blue-600" : "text-gray-700 bg-white border-gray-300 hover:bg-gray-50")"
                        @onclick="() => PageSelected(item)">@item</a>
                 }
-                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">Next</a>
+                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50" @onclick=NextPage>Next</a>
             </div>
         </div>
     }
