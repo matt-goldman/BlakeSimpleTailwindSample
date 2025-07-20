@@ -9,12 +9,21 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.6" PrivateAssets="all" />
-  
+
     <PackageReference Include="Blake.Types" Version="*" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="npm run build:css" />
+  </Target>
+
+  <!--
+    Generate razor files from markdown content
+    disable default container renderers with -dr
+    (They depend on Bootstrap; this project uses Tailwind CSS)
+  -->
+  <Target Name="Bake" BeforeTargets="Build">
+    <Exec Command="blake bake -dr" />
   </Target>
 
   <ItemGroup>
