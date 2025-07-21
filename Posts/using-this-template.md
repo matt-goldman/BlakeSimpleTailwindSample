@@ -18,7 +18,11 @@ Blake is all about keeping things simple. This template embraces that. There's n
 
 ### 🧩 Uses Tailwind 4
 
-The styling here is powered by Tailwind CSS v4. The CSS is built via `npm run build:css` (run by default when you build the project), and the layout is responsive out of the box.
+The styling here is powered by Tailwind CSS v4. The CSS is built via `npm run build:css`, and the layout is responsive out of the box.
+
+### 📄 Markdown Content
+
+As with any Blake site, the content is written in Markdown. This template uses the Blake CLI to render posts and pages.
 
 ### ✨ Custom Container Renderers
 
@@ -46,6 +50,24 @@ Which gets rendered as:
 <WarningContainer Title="Custom containers may not work">
   <p>If you are using custom containers, they might not work as expected in the new API setup. You may need to adjust your dependency injection configuration.</p>
 </WarningContainer>
+```
+
+### Automatic Build Tasks
+
+This template includes a few handy build tasks that are run automatically:
+
+- **CSS Build**: The Tailwind CSS is built automatically when you run the project.
+- **Blake Build**: The `blake bake` command generates the static site from your Markdown files.
+
+These are managed as MS Build tasks in the `.csproj` file, so you can run them with `dotnet build` or directly from Visual Studio.
+
+```xml
+<Target Name="BuildTailwind" BeforeTargets="Build">
+    <Exec Command="npm run build:css" />
+</Target>
+<Target Name="BlakeBake" BeforeTargets="Build">
+    <Exec Command="blake bake -dr" />
+</Target>
 ```
 
 ### 🖼️ Images
