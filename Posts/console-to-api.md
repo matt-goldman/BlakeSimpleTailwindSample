@@ -9,3 +9,7 @@ avatar: "/images/authors/john.jpg"
 ---
 
 You’ve got a console app and now you want to make it a proper API. Here's the beginner-friendly roadmap to take you there.
+
+:::warning Title="Custom containers may not work"
+If you are using custom containers, they might not work as expected in the new API setup. You may need to adjust your dependency injection configuration.
+:::

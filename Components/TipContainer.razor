@@ -1,0 +1,25 @@
+<div class="mx-auto w-full max-w-4xl">
+    <div class="rounded-lg bg-blue-50 p-4 ring-1 ring-inset ring-blue-200">
+        <div class="flex items-start gap-x-4">
+            <div class="shrink-0">
+                <svg aria-hidden="true" class="size-5 text-blue-500" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="256" height="256" fill="none"></rect><line x1="88" y1="232" x2="168" y2="232" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line><path d="M78.7,167A79.5,79.5,0,0,1,48,104.5C47.8,61.1,82.7,25,126.1,24a80,80,0,0,1,51.3,142.9A24.2,24.2,0,0,0,168,186v6a8,8,0,0,1-8,8H96a8,8,0,0,1-8-8v-6A24.4,24.4,0,0,0,78.7,167Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" id="mainIconPathAttribute"></path><path d="M136.1,56.8a47.9,47.9,0,0,1,39.2,39.1" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" id="mainIconPathAttribute"></path>
+                </svg>
+            </div>
+            <div class="flex-1">
+                <h3 class="text-sm font-semibold text-blue-700">@Title</h3>
+                <div class="mt-1">
+                    <p class="text-sm text-blue-600">@ChildContent</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string Title { get; set; } = "Tip";
+}
