@@ -1,5 +1,5 @@
 ﻿<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-    <img src="@(Page.Image ?? "https://placeholder.pics/svg/300x192/DFEEF6-B6BEC3/000000")" alt="Post image" class="w-full h-48 object-cover">
+    <img src="@(_imageUrl)" alt="Post image" class="w-full h-48 object-cover">
     <div class="p-6">
         <div class="flex items-center mb-2">
             <span class="@_chipBgColor @_chipTextColor text-xs font-medium px-2.5 py-0.5 rounded">@_keyTag</span>
@@ -22,6 +22,8 @@
     private string _chipBgColor = "bg-gray-100";
     private string _chipTextColor = "text-gray-800";
 
+    private string _imageUrl = "https://placeholder.pics/svg/300x192/DFEEF6-B6BEC3/000000";
+
     protected override void OnParametersSet()
     {
         if (Page is not null)
@@ -33,6 +35,11 @@
                 _keyTag = firstTag;
                 _chipBgColor = $"bg-{firstTag.GetChipColor()}-100";
                 _chipTextColor = $"text-{firstTag.GetChipColor()}-800";
+            }
+
+            if (!string.IsNullOrEmpty(Page.Image))
+            {
+                _imageUrl = Page.Image;
             }
         }
 

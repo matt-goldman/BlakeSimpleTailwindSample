@@ -8,11 +8,11 @@ avatar: "/images/authors/john.jpg"
 image: "/images/posts/di.png"
 ---
 
-Dependency Injection (DI) is one of those terms that gets thrown around a lot in the C# and ASP.NET Core ecosystem. If you're new to it, don't worry — this post breaks it down into simple terms with real-world analogies.
+Dependency Injection (DI) is one of those terms that gets thrown around a lot in the C# and ASP.NET Core ecosystem. If you're new to it, don't worry - this post breaks it down into simple terms with real-world analogies.
 
 ## What Even Is It?
 
-Imagine you run a bakery. Every time you bake a cake, you go to the store to buy ingredients. That’s exhausting and inefficient. Instead, imagine someone hands you a pre-stocked basket with everything you need. That’s dependency injection.
+Imagine you run a bakery. Every time you bake a cake, you go to the store to buy ingredients. That's exhausting and inefficient. Instead, imagine someone hands you a pre-stocked basket with everything you need. That's dependency injection.
 
 In programming terms, **DI is a technique where dependencies (things a class needs to do its work) are provided rather than created by the class itself.**
 
@@ -56,7 +56,7 @@ You typically register services in `Program.cs`:
 builder.Services.AddScoped<IMyService, MyService>();
 ```
 
-This tells the DI container: “Whenever something needs an `IMyService`, give them a `MyService`.”
+This tells the DI container: "Whenever something needs an `IMyService`, give them a `MyService`."
 
 ## Common Pitfalls
 
