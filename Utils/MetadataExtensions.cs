@@ -1,4 +1,4 @@
-namespace BlakeSampleBlog.Utils;
+namespace BlakeSimpleTailwindSample.Utils;
 
 public static class MetadataExtensions
 {
