@@ -1,13 +1,13 @@
 <div class="mx-auto w-full max-w-4xl">
     <div class="rounded-lg bg-gray-50 p-4 ring-1 ring-inset ring-gray-200">
         <div class="flex items-start gap-x-4">
-            <div class="shrink-0">
+            <div class="shrink-0 mt-1">
               <svg aria-hidden="true" class="size-5 text-gray-500" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M27.5 5.5C15.3497 5.5 5.5 15.3497 5.5 27.5C5.5 39.6504 15.3497 49.5 27.5 49.5C39.6504 49.5 49.5 39.6504 49.5 27.5C49.5 15.3497 39.6504 5.5 27.5 5.5ZM0 27.5C0 12.3122 12.3122 0 27.5 0C42.6879 0 55 12.3122 55 27.5C55 42.6879 42.6879 55 27.5 55C12.3122 55 0 42.6879 0 27.5ZM24.6131 16.5C24.6131 14.9812 25.8443 13.75 27.3631 13.75H27.6369C29.1557 13.75 30.387 14.9812 30.387 16.5V16.775C30.387 18.2916 29.1591 19.522 27.6425 19.525L27.3686 19.5255C26.6383 19.527 25.9374 19.2379 25.4205 18.722C24.9035 18.2062 24.6131 17.5058 24.6131 16.7755V16.5ZM27.5 22C29.0188 22 30.25 23.2312 30.25 24.75V38.5C30.25 40.0188 29.0188 41.25 27.5 41.25C25.9812 41.25 24.75 40.0188 24.75 38.5V24.75C24.75 23.2312 25.9812 22 27.5 22Z" fill="currentColor"></path>
               </svg>
             </div>
             <div class="flex-1">
-                <h3 class="text-sm font-semibold text-gray-700">@Title</h3>
+                <h3 class="text-sm font-semibold text-gray-700 mt-1">@Title</h3>
                 <div class="mt-1">
                     <p class="text-sm text-gray-600">@ChildContent</p>
                 </div>
@@ -21,5 +21,5 @@
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
-    public string? Title { get; set; } = string.Empty;
+    public string? Title { get; set; } = "Note";
 }
