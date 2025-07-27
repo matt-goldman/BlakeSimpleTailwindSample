@@ -21,7 +21,7 @@
             <article class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="md:flex">
                     <div class="md:w-1/3">
-                        <img src="@(_featuredPost.Image ?? "https://placeholder.pics/svg/400x300/DFEEF6-B6BEC3/000000")" alt="Featured post image" class="w-full h-48 md:h-full object-cover">
+                        <img src="@(string.IsNullOrEmpty(_featuredPost.Image) ? "https://placeholder.pics/svg/400x300/DFEEF6-B6BEC3/000000" : _featuredPost.Image)" alt="Featured post image" class="w-full h-48 md:h-full object-cover">
                     </div>
                     <div class="md:w-2/3 p-6">
                         <div class="flex items-center mb-2">
@@ -89,7 +89,7 @@
                 .OrderByDescending(p => p.Date)
                 .ToList();
 
-            _featuredPost = pages.FirstOrDefault(p => p.Metadata.ContainsKey("Featured")) ?? pages.FirstOrDefault();
+            _featuredPost = pages.FirstOrDefault(p => p.Metadata.ContainsKey("featured")) ?? pages.FirstOrDefault();
 
             _recentPosts = pages
                 .Where(p => p != _featuredPost && !p.Draft)
