@@ -17,8 +17,6 @@
     <Exec Command="npm install &amp;&amp; npm run build:css" />
   </Target>
 
-  </Target>
-
   <!--
     Generate razor files from markdown content
     disable default container renderers with -dr
