@@ -119,7 +119,7 @@ If you have cloned this repository, or created this with `blake new`, you can pu
 
 1. Enable GitHub Pages in your repository settings.
 2. Push your changes to the main branch.
-3. The GitHub Actions workflow will automatically build the site and deploy it to the `gh-pages` branch.
+3. The GitHub Actions workflow will automatically build the site and deploy it to the `main` branch.
 
 As a Blake site is just a static site, you can also deploy it to any static hosting service like Azure, Netlify, Vercel, Cloudflare, or even a simple web server. Most of these are free!
 
