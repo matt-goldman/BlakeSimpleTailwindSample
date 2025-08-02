@@ -33,10 +33,12 @@ jobs:
       - name: Publish .NET Project
         run: dotnet publish -c Release -o release --nologo
 
-      # changes the base-tag in index.html from '/' to 'BlakeSimpleTailwindSample' to match GitHub Pages repository subdirectory
-      # TODO: Make this generic
-      - name: Change base-tag in index.html from / to BlakeSimpleTailwindSample
-        run: sed -i 's/<base href="\/" \/>/<base href="\/BlakeSimpleTailwindSample\/" \/>/g' release/wwwroot/index.html
+      # changes the base-tag in index.html from '/' to the repository name to match GitHub Pages repository subdirectory
+      # This is now generic and works for any repository.
+      - name: Change base-tag in index.html from / to repository name
+        run: |
+          REPO_NAME="${{ github.event.repository.name }}"
+          sed -i "s|<base href=\"/\" />|<base href=\"/${REPO_NAME}/\" />|g" release/wwwroot/index.html
 
       # copy index.html to 404.html to serve the same file when a file is not found
       - name: copy index.html to 404.html
