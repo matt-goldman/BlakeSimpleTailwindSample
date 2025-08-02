@@ -14,7 +14,9 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="npm run build:css" />
+    <Exec Command="npm install &amp;&amp; npm run build:css" />
+  </Target>
+
   </Target>
 
   <!--
