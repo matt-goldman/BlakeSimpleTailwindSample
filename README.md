@@ -3,6 +3,10 @@
 A clean and minimal starter template for building Markdown-powered blogs with the [Blake](https://github.com/matt-goldman/blake) static site generator.
 Styled with [Tailwind CSS](https://tailwindcss.com/) and ready to deploy.
 
+## Demo
+
+You can see a live demo of this template at [Blake Simple Tailwind Sample](https://matt-goldman.github.io/BlakeSimpleTailwindSample).
+
 ---
 
 ## ✨ Features
@@ -35,7 +39,6 @@ dotnet tool install -g Blake.CLI
    ```bash
    blake new --template tailwind-sample
    ```
-   
    (see Blake docs for more details on the `blake new` command)
 
    Alternatively, you can clone this repository directly:
@@ -110,13 +113,15 @@ blake-sample-blog/
 
 ## 📦 Deployment
 
-This template outputs static files. You can host the result anywhere that serves static sites, e.g.:
+This template includes a GitHub Actions workflow for deploying to GitHub Pages. The workflow is defined in `.github/workflows/deploy-pages.yml`, it builds and deploys the site automatically when you push to the main branch.
 
-* GitHub Pages
-* Azure Static Web Apps
+If you have cloned this repository, or created this with `blake new`, you can push to your GitHub repository and the workflow will handle the deployment as it integrates with GitHub Pages automatically. You will have to complete the following setup steps:
 
+1. Enable GitHub Pages in your repository settings.
+2. Push your changes to the main branch.
+3. The GitHub Actions workflow will automatically build the site and deploy it to the `gh-pages` branch.
 
-Push to your main branch and GitHub Actions will automatically build and deploy.
+As a Blake site is just a static site, you can also deploy it to any static hosting service like Azure, Netlify, Vercel, Cloudflare, or even a simple web server. Most of these are free!
 
 ---
 
