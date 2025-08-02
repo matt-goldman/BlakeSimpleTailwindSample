@@ -22,7 +22,8 @@
     disable default container renderers with -dr
     (They depend on Bootstrap; this project uses Tailwind CSS)
   -->
-  <Target Name="Bake" BeforeTargets="Build">
+  <Target Name="Bake" BeforeTargets="CoreCompile">
+    <Message Text="Running Bake..." Importance="high" />
     <Exec Command="blake bake -dr" />
   </Target>
 
