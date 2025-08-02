@@ -917,6 +917,9 @@
   .ml-10 {
     margin-left: calc(var(--spacing) * 10);
   }
+  .contents {
+    display: contents;
+  }
   .flex {
     display: flex;
   }
