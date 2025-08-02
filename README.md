@@ -5,7 +5,7 @@ Styled with [Tailwind CSS](https://tailwindcss.com/) and ready to deploy.
 
 ## Demo
 
-You can see a live demo of this template at [Blake Simple Tailwind Sample](https://matt-goldman.github.io/BlakeSimpleTailwindSample).
+You can see a live demo of this template at [Blake Simple Tailwind Sample](https://tailwindsample.blake-ssg.org).
 
 ---
 
@@ -113,15 +113,28 @@ blake-sample-blog/
 
 ## 📦 Deployment
 
-This template includes a GitHub Actions workflow for deploying to GitHub Pages. The workflow is defined in `.github/workflows/deploy-pages.yml`, it builds and deploys the site automatically when you push to the main branch.
+This repo includes sample GitHub Actions workflows for deploying to Azure Static Web Apps and to GitHub Pages. As the demo for this is hosted on Azure, the workflow is enabled by default. The GitHub Pages workflow is enabled for `workflow_dispatch` so you can run it manually, but the trigger for push to main is commented out.
 
-If you have cloned this repository, or created this with `blake new`, you can push to your GitHub repository and the workflow will handle the deployment as it integrates with GitHub Pages automatically. You will have to complete the following setup steps:
+As a Blake site is just a static site, you can also deploy it to any static hosting service like Azure, Netlify, Vercel, Cloudflare, or even a simple web server. Most of these are free!
+
+The following sections provide instructions for customising the workflows to deploy your own to Azure Static Web Apps and GitHub Pages.
+
+### Azure Static Web Apps
+
+To deploy to Azure Static Web Apps, follow these steps:
+
+1. Create a new Azure Static Web App in the Azure portal.
+2. Get your deployment token from the Azure portal by going to the Overview tab, and clicking "Manage deployment token".
+3. Set the `AZURE_STATIC_WEB_APPS_API_TOKEN` secret in your GitHub repository settings. This token is used by the GitHub Actions workflow to deploy your site.
+4. The workflow will automatically build and deploy your site when you push changes to the `main` branch.
+
+### GitHub Pages
+
+To deploy to GitHub Pages, follow these steps:
 
 1. Enable GitHub Pages in your repository settings.
 2. Push your changes to the main branch.
 3. The GitHub Actions workflow will automatically build the site and deploy it to the `main` branch.
-
-As a Blake site is just a static site, you can also deploy it to any static hosting service like Azure, Netlify, Vercel, Cloudflare, or even a simple web server. Most of these are free!
 
 ---
 
