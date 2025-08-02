@@ -118,11 +118,10 @@ This template includes a GitHub Actions workflow for deploying to GitHub Pages. 
 If you have cloned this repository, or created this with `blake new`, you can push to your GitHub repository and the workflow will handle the deployment as it integrates with GitHub Pages automatically. You will have to complete the following setup steps:
 
 1. Enable GitHub Pages in your repository settings.
-2. In the workflow file, ensure the `base` tag in `index.html` is set correctly for your repository name. The default is set to `BlakeSimpleTailwindSample`, but you can change it to match your repository name.
-3. Push your changes to the main branch.
-4. The GitHub Actions workflow will automatically build the site and deploy it to the `gh-pages` branch.
+2. Push your changes to the main branch.
+3. The GitHub Actions workflow will automatically build the site and deploy it to the `gh-pages` branch.
 
-As a Blake site is just a static site, you can also deploy it to any static hosting service like Azure, Netlify, Vercel, Cloudflare, or even a simple web server. Most of these are free! 
+As a Blake site is just a static site, you can also deploy it to any static hosting service like Azure, Netlify, Vercel, Cloudflare, or even a simple web server. Most of these are free!
 
 ---
 
