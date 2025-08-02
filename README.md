@@ -30,7 +30,15 @@ dotnet tool install -g Blake.CLI
 
 ## 🚀 Getting Started
 
-1. **Clone the repository:**
+1. **Create a new blake site from the template:**
+
+   ```bash
+   blake new --template tailwind-sample
+   ```
+   
+   (see Blake docs for more details on the `blake new` command)
+
+   Alternatively, you can clone this repository directly:
 
    ```bash
    git clone https://github.com/matt-goldman/blake-sample-blog.git
