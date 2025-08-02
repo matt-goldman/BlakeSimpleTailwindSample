@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # uses GitHub's checkout action to checkout code from the main branch
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       # sets up .NET SDK 9.0.x
       - name: Setup .NET
