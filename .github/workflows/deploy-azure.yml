@@ -46,7 +46,6 @@ jobs:
           api_location: "" # Api source code path - optional
           skip_api_build: true
           skip_app_build: true # Skip Oryx app build because Oryx incorrectly detects the project framework, leading to a failed or incorrect build. The app is built manually in the previous step.
-          output_location: "site_output/wwwroot" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
