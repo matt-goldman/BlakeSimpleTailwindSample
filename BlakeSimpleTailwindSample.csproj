@@ -12,10 +12,15 @@
     <PackageReference Include="Blake.Types" Version="1.0.7" />
 
   </ItemGroup>
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="npm install &amp;&amp; npm run build:css" />
+  
+  <Target Name="EnsureNodeModules" BeforeTargets="Build">
+    <Exec Command="npm ci" Condition="!Exists('node_modules')" />
   </Target>
+  <Target Name="BuildTailwind" BeforeTargets="Publish">
+    <Exec Command="npm run build:css" />
+  </Target>
+
+
 
   <!--
     Generate razor files from markdown content
