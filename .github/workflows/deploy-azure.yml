@@ -26,7 +26,9 @@ jobs:
       - name: Install Blake CLI
         run: dotnet tool install -g Blake.CLI
 
-      # blake bake and npm commands are run automatically on build, so just build the .NET project
+      - name: Bake static content
+        run: blake bake
+
       - name: Build the site
         id: build
         run: dotnet build --configuration Release -o site_output

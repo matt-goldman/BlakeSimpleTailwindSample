@@ -22,10 +22,10 @@
     disable default container renderers with -dr
     (They depend on Bootstrap; this project uses Tailwind CSS)
   -->
-  <Target Name="Bake" BeforeTargets="CoreCompile">
-    <Message Text="Running Bake..." Importance="high" />
+    <!-- Skipping for now and adding to pipeline. Will be resolved in next release of Blake. -->
+  <!-- <Target Name="Bake" BeforeTargets="CoreCompile">
     <Exec Command="blake bake -dr" />
-  </Target>
+  </Target> -->
 
   <ItemGroup>
     <!-- Explicitly include generated .razor files -->
