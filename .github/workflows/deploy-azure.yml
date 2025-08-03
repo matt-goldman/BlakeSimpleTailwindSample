@@ -31,7 +31,7 @@ jobs:
 
       - name: Build the site
         id: build
-        run: dotnet build --configuration Release -o site_output
+        run: dotnet publish --configuration Release -o site_output
 
       - name: Build And Deploy
         id: deploy
