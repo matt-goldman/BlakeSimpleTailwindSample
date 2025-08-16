@@ -1,0 +1,21 @@
+.viewport {
+    overflow:hidden;
+}
+.rail {
+    display:grid; grid-template-columns:100% 100%; transform:translateX(0);
+}
+.rail.anim {
+    transition: transform .25s ease;
+}
+
+.results.fade {
+    opacity:0; transition:opacity .15s ease;
+}
+.results {
+    opacity:1; transition:opacity .15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail.anim { transition:none; }
+  .results, .results.fade { transition:none; }
+}

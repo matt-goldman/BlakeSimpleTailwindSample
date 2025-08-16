@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject NavigationManager Nav
 
 <PageTitle>{{BlakeSimpleTailwindSample}} - Home</PageTitle>
 
@@ -42,12 +43,26 @@
     <!-- Recent Posts -->
     <section>
         <h3 class="text-2xl font-bold text-gray-900 mb-6">Recent Posts</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach (var post in _recentPosts)
-            {
-                <PostCard Page="@post" />
-            }
-        </div>
+            <div class="viewport">
+                <div class="rail @(_isAnimating ? "anim" : null)" style="transform: translateX(@_railX%)">
+                    <div class="pane">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            @foreach (var post in _recentPosts)
+                            {
+                                <PostCard Page="@post"/>
+                            }
+                        </div>
+                    </div>
+                    <div class="pane">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            @foreach (var post in _incomingPosts)
+                            {
+                                <PostCard Page="@post"/>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
     </section>
 
     <!-- Pagination -->
@@ -55,29 +70,38 @@
     {
         <div class="flex justify-center mt-12">
             <div class="flex space-x-1">
-                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50" @onclick=PreviousPage>Previous</a>
+                <button class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50" @onclick=PreviousPage>Previous</button>
                 @foreach (var item in _pages)
                 {
-                    <a href="#" class="px-3 py-2 text-sm font-medium @(item == _currentPage ? "text-white bg-blue-600 border-blue-600" : "text-gray-700 bg-white border-gray-300 hover:bg-gray-50")"
-                       @onclick="() => PageSelected(item)">@item</a>
+                    <button class="px-3 py-2 text-sm font-medium @(item == _currentPage ? "text-white bg-blue-600 border-blue-600" : "text-gray-700 bg-white border-gray-300 hover:bg-gray-50")"
+                            @onclick="() => PageSelected(item)">@item</button>
                 }
-                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50" @onclick=NextPage>Next</a>
+                <button class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50" @onclick=NextPage>Next</button>
             </div>
         </div>
     }
 </main>
 
 <!-- Footer -->
-<Footer />
+<Footer></Footer>
 
 @code {
+
+    [SupplyParameterFromQuery]
+    private int? Page { get; set; } = 1;
+
     private PageModel? _featuredPost;
 
     private List<PageModel> _recentPosts = [];
 
+    private List<PageModel> _incomingPosts = [];
+
     private List<int> _pages = [];
 
     private int _currentPage = 1;
+
+    bool _isAnimating;
+    int _railX; // 0 or -100 (or +100 for prev)
 
     protected override void OnInitialized()
     {
@@ -101,33 +125,91 @@
                 _pages = Enumerable.Range(1, (int)Math.Ceiling((double)(pages.Count - 1) / 6)).ToList();
             }
         }
+
+        if (Page is > 1)
+        {
+            _currentPage = Page.Value;
+            GoToPage(_currentPage);
+        }
     }
 
-    private void PageSelected(int pageNumber)
-    {
-        _recentPosts = GeneratedContentIndex.GetPages()
-            .Where(p => !p.Draft && p.Slug.Contains("/posts/", StringComparison.OrdinalIgnoreCase))
-            .OrderByDescending(p => p.Date)
-            .Skip((pageNumber - 1) * 6)
-            .Take(6)
-            .ToList();
-    }
 
-    private void NextPage()
+    private async Task NextPage()
     {
         if (_currentPage < _pages.Count)
         {
-            _currentPage++;
-            PageSelected(_currentPage);
+            await PageSelected(_currentPage + 1);
         }
     }
 
-    private void PreviousPage()
+    private async Task PreviousPage()
     {
         if (_currentPage > 1)
         {
-            _currentPage--;
-            PageSelected(_currentPage);
+            await PageSelected(_currentPage - 1);
         }
+    }
+
+    private async Task PageSelected(int pageNumber)
+    {
+        if (pageNumber > _currentPage - 1 || pageNumber < _currentPage + 1)
+        {
+            await GoToPageAsync(pageNumber);
+        }
+        else
+        {
+            GoToPage(pageNumber);
+        }
+    }
+
+    private async Task GoToPageAsync(int pageId)
+    {
+        if (pageId == _currentPage || _isAnimating) return;
+
+        _incomingPosts = GeneratedContentIndex.GetPages()
+                    .Where(p => !p.Draft && p.Slug.Contains("/posts/", StringComparison.OrdinalIgnoreCase))
+                    .OrderByDescending(p => p.Date)
+                    .Skip((pageId - 1) * 6)
+                    .Take(6)
+                    .ToList();
+
+        _isAnimating = true;
+        _railX = pageId > _currentPage ? -100 : 100; // slide direction
+        StateHasChanged();
+
+        await Task.Delay(250); // match CSS
+        _currentPage = pageId;
+        _recentPosts = _incomingPosts;
+        _incomingPosts = [];
+        _railX = 0; _isAnimating = false;
+        GoToPage(_currentPage); // update URL
+    }
+
+    private void GoToPage(int pageId)
+    {
+        _recentPosts = GeneratedContentIndex.GetPages()
+                    .Where(p => !p.Draft && p.Slug.Contains("/posts/", StringComparison.OrdinalIgnoreCase))
+                    .OrderByDescending(p => p.Date)
+                    .Skip((pageId - 1) * 6)
+                    .Take(6)
+                    .ToList();
+
+        _isAnimating = false;
+        _railX = 0;
+        
+        // TODO: forceLoad: false still navigates, just client-side. So we still get scroll to top.
+        // Will need to either bypass that, or just use history.pushState in JSInterop.
+        // SetQuery(pageId);
+    }
+
+    private void SetQuery(int page)
+    {
+        var uri = new Uri(Nav.Uri);
+        var baseUri = uri.GetLeftPart(UriPartial.Path);
+        var qs = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        qs["page"] = (page + 1).ToString();
+
+        var newUri = $"{baseUri}?{qs}";
+        Nav.NavigateTo(newUri, forceLoad: false);
     }
 }
