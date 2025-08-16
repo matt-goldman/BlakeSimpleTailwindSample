@@ -83,7 +83,7 @@
                         <img src="@(post.Image ?? "https://placeholder.pics/svg/300x150/DFEEF6-B6BEC3/000000")" alt="@post.Title" class="w-full h-32 object-cover">
                         <div class="p-4">
                             <h4 class="text-lg font-semibold text-gray-900 mb-2">
-                                <a href="#" class="hover:text-blue-600 transition-colors">@post.Title</a>
+                                <NavLink href="@post.Slug" class="hover:text-blue-600 transition-colors">@post.Title</NavLink>
                             </h4>
                             <p class="text-gray-600 text-sm">@post.Description.Truncate(80)</p>
                         </div>
