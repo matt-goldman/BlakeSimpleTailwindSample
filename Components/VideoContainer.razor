@@ -19,6 +19,17 @@
             break;
         }
         case SourceType.YouTube:
+            if (Start.HasValue || End.HasValue)
+            {
+                var startParam = Start.HasValue ? $"?start={Start.Value}" : string.Empty;
+                var endParam = End.HasValue ? $"&end={End.Value}" : string.Empty;
+                VideoId += $"{startParam}{endParam}";
+            }
+            if (string.IsNullOrEmpty(VideoId))
+            {
+                <p>YouTube video ID is required.</p>
+                return;
+            }
             <iframe class="embed-video youtube mx-auto" width="@Width" height="@Height" src="https://www.youtube.com/embed/@VideoId" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             break;
         case SourceType.Vimeo:
@@ -62,5 +73,11 @@
 
     [Parameter]
     public string? Caption { get; set; } = string.Empty;
+
+    [Parameter]
+    public int? Start { get; set; }
+
+    [Parameter]
+    public int? End { get; set; }
 
 }
