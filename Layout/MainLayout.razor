@@ -1,4 +1,32 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager Nav
+
+<HeadContent>
+    <meta name="description" content="@GetPageDescription()" />
+    <meta name="keywords" content="@GetPageKeywords()" />
+    <meta property="og:title" content="@GetPageTitle()" />
+    <meta property="og:description" content="@GetPageDescription()" />
+</HeadContent>
+
 <NavMenu />
     
 @Body
+
+@code {
+    
+    private PageModel? _currentPage;
+    
+    protected override void OnInitialized()
+    {
+        var currentUrl = Nav.Uri;
+        _currentPage = GeneratedContentIndex
+            .GetPages()
+            .FirstOrDefault(p => currentUrl.Contains(p.Slug, StringComparison.InvariantCultureIgnoreCase));
+    }
+    
+    private string GetPageTitle() => _currentPage?.Title ?? "Default Application Title";
+
+    private string GetPageDescription() => _currentPage?.Description ?? "This is the default description for the application.";
+
+    private string GetPageKeywords() => _currentPage is not null ? string.Join(",", _currentPage.Tags) : "default, keywords, for, application";
+}
