@@ -1,0 +1,66 @@
+<figure>
+    @switch (Source)
+    {
+        case SourceType.File:
+        {
+            <video class="embed-video file mx-auto" controls="" style="width: @Width; height: @Height;">
+                <source src="@FilePath" type="video/mp4">
+                <source src="@FilePath" type="video/webm">
+                <source src="@FilePath" type="video/ogg">
+                @if(ChildContent is not null)
+                {
+                    @ChildContent
+                }
+                else
+                {
+                    <p>Your browser does not support the video tag. Here is a <a href="@FilePath">link to the video file</a> instead.</p>
+                }
+            </video>
+            break;
+        }
+        case SourceType.YouTube:
+            <iframe class="embed-video youtube mx-auto" width="@Width" height="@Height" src="https://www.youtube.com/embed/@VideoId" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            break;
+        case SourceType.Vimeo:
+            <iframe class="embed-video vimeo mx-auto" width="@Width" height="@Height" src="https://player.vimeo.com/video/@VideoId" frameborder="0" allowfullscreen></iframe>
+            break;
+        case SourceType.Dailymotion:
+            <iframe class="embed-video dailymotion mx-auto" width="@Width" height="@Height" src="https://www.dailymotion.com/embed/video/@VideoId" frameborder="0" allowfullscreen></iframe>
+            break;
+        case SourceType.Twitch:
+            <iframe class="embed-video twitch mx-auto" width="@Width" height="@Height" src="https://player.twitch.tv/?video=@VideoId&parent=example.com" frameborder="0"></iframe>
+            break;
+        default:
+            <p>Unsupported video source.</p>
+            break;
+    }
+    <figcaption style="margin-left:auto;margin-right:auto;font-style:italic;text-align:center;">
+        @Caption
+    </figcaption>
+</figure>
+
+@code {
+
+
+    [Parameter, EditorRequired]
+    public required SourceType Source { get; set; }
+
+    [Parameter]
+    public string? VideoId { get; set; }
+
+    [Parameter]
+    public string? FilePath { get; set; }
+
+    [Parameter]
+    public string? Width { get; set; } = "100%";
+
+    [Parameter]
+    public string? Height { get; set; } = "100%";
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string? Caption { get; set; } = string.Empty;
+
+}
